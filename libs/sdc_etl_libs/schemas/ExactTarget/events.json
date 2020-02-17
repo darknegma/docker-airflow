@@ -1,0 +1,33 @@
+  {
+    "namespace": "ExactTarget",
+    "type": "object",
+    "name": "events",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "MARKETING", "table_name": "EVENTS_PII", "schema": "EXACTTARGET"},
+    "data_source": {"type": "api"},
+    "upsert_data": true,
+    "fields": [
+      {"name":"SENDID","type":{"type":"int"},"is_nullable": true},
+      {"name":"OBJECTID","type":{"type":"string"},"is_nullable": true},
+      {"name":"EVENTDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"EVENTTYPE","type":{"type":"string"},"is_nullable": true},
+      {"name":"SUBSCRIBERKEY","type":{"type":"string"},"is_nullable": true},
+      {"name":"CLIENT_ID","type":{"type":"string"},"is_nullable": true},
+      {"name":"BATCHID","type":{"type":"int"},"is_nullable": true},
+      {"name":"TRIGGEREDSENDDEFINITIONOBJECTID","type":{"type":"string"},"is_nullable": true},
+      {"name":"PARTNERKEY","type":{"type":"string"},"is_nullable": true},
+      {"name":"SMTPCODE","type":{"type":"int"},"is_nullable": true},
+      {"name":"BOUNCECATEGORY","type":{"type":"string"},"is_nullable": true},
+      {"name":"SMTPREASON","type":{"type":"string"},"is_nullable": true},
+      {"name":"BOUNCETYPE","type":{"type":"string"},"is_nullable": true},
+      {"name":"BOUNCESUBCATEGORY","type":{"type":"string"},"is_nullable": true},
+      {"name":"ALIAS","type":{"type":"string"},"is_nullable": true},
+      {"name":"URL","type":{"type":"string"},"is_nullable": true},
+      {"name":"CLICKURL","type":{"type":"string"},"is_nullable": true},
+      {"name":"CLICKLINKNAME","type":{"type":"string"},"is_nullable": true},
+      {"name":"CLICKLINKCONTENT","type":{"type":"string"},"is_nullable": true},
+      {"name":"URLID","type":{"type":"string"},"is_nullable": true},
+      {"name":"ID","type":{"type":"string"},"is_nullable": true},
+      {"name":"CREATEDDATE","type":{"type":"string", "logical_type": "datetime"},"is_nullable": true}
+    ]
+  }

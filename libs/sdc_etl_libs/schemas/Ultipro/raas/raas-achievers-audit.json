@@ -1,0 +1,24 @@
+  {
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "raas-achievers-audit",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "RAAS_ACHIEVERS_AUDIT_PII", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://service5.ultipro.com/services/"},
+  "fields": [
+    {"name":"EMAILADDRESS","type":{"type":"string"}},
+    {"name":"EMPLOYEENUMBER","type":{"type":"string"}},
+    {"name":"FIRSTNAME","type":{"type":"string"}},
+    {"name":"LASTNAME","type":{"type":"string"}},
+    {"name":"SUPERVISOREMAIL","type":{"type":"string"}},
+    {"name":"LANGUAGECODE","type":{"type":"string"}},
+    {"name":"COUNTRY","type":{"type":"string"}},
+    {"name":"ORIGINALHIREDATE","type":{"type":"string", "logical_type":"datetime"}},
+    {"name":"JOBTITLE","type":{"type":"string"}},
+    {"name":"ORGLEVEL1","type":{"type":"string"}},
+    {"name":"LOCATION","type":{"type":"string"}},
+    {"name":"LOCATIONCODE","type":{"type":"string"}},
+    {"name":"COMPANYCODE","type":{"type":"string"}},
+    {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+  ]
+  }

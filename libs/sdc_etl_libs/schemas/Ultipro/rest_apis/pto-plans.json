@@ -1,0 +1,20 @@
+  {
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "pto-plans",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "RESTAPI_PTO_PLANS_PII", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://service5.ultipro.com/api/personnel/v1"},
+  "fields": [
+    {"name":"EMPLOYEEID","type":{"type":"string"}, "sf_merge_key": true},
+    {"name":"COMPANYID","type":{"type":"string"}, "sf_merge_key": true},
+    {"name":"PTOPLAN","type":{"type":"string"}, "sf_merge_key": true},
+    {"name":"EARNED","type":{"type":"float"}},
+    {"name":"TAKEN","type":{"type":"float"}},
+    {"name":"PENDINGBALANCE","type":{"type":"float"}},
+    {"name":"EARNEDTHROUGHDATE","type":{"type":"string","logical_type":"datetime"}},
+    {"name":"RESET","type":{"type":"string","logical_type":"datetime"}},
+    {"name":"PENDINGMOVEDATE","type":{"type":"string","logical_type":"datetime"}},
+    {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+  ]
+    }

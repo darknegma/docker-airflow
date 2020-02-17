@@ -1,0 +1,140 @@
+  {
+    "namespace": "TNT",
+    "type": "object",
+    "name": "tracking-events",
+    "country_code": "USA",
+    "estimated_row_size": "40b",
+    "estimated_row_count": 500,
+    "data_sink": [
+      {
+        "type": "s3",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "tnt/",
+        "region": "us-east-2",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "tnt/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "file_regex": ".*ECS",
+          "headers": false
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "tnt_test/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "file_regex": ".*ECS",
+          "headers": false
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "ExactTarget_sink_0",
+        "endpoint_type": "sink",
+        "host": "66.231.91.46",
+        "port": 22,
+        "path": "Import/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "exact-target/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "file_regex": ".*ECS",
+          "headers": false
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_1",
+        "endpoint_type": "sink",
+        "database": "LOGISTICS",
+        "table_name": "TRACKING_EVENTS",
+        "schema": "TNT",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_1_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "TRACKING_EVENTS",
+        "schema": "TNT",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "host": "ftp.smileco.com",
+        "port": 22,
+        "path": "/prod/tracking/Processed/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "tnt/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "headers": false,
+          "file_regex": ".*ECS"
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "alternate_source_0",
+        "endpoint_type": "source",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "tnt/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "headers": false,
+          "file_regex": "SMILE[0-9]{3,5}_(201912|2020).*ECS"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"DEPOT","type":{"type":"string"}},
+      {"name":"CONSIGNMENT","type":{"type":"string"}},
+      {"name":"STATUS","type":{"type":"string"}},
+      {"name":"STATUS_CAPTURE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"STATUS_AVAILABILITY","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"ADDITIONAL_INFORMATION","type":{"type":"string"}, "is_pii":  true},
+      {"name":"RECEIVER","type":{"type":"string"}, "is_pii":  true},
+      {"name":"CNM_ITEMS","type":{"type":"int"}},
+      {"name":"STATUS_ITEMS","type":{"type":"int"}},
+      {"name":"RECEIVER_POSTCODE","type":{"type":"string"}, "is_pii":  true},
+      {"name":"RECEIVER_SUBURB","type":{"type":"string"}, "is_pii":  true},
+      {"name":"CUSTOMER_REFERENCE","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

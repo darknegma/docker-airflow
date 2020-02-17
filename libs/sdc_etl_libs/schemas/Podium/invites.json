@@ -1,0 +1,23 @@
+  {
+    "namespace": "Podium",
+    "type": "object",
+    "name": "invites",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "MARKETING", "table_name": "INVITES_PII", "schema": "PODIUM"},
+    "data_source": {"type": "api", "base_url": "https://podium.co/api/v2/"},
+    "fields": [
+      {"name":"ID","type":{"type":"int"}, "sf_merge_key": true},
+      {"name":"UID","type":{"type":"string"}},
+      {"name":"PHONENUMBER","type":{"type":"string"}},
+      {"name":"LASTINVITATIONSENT","type":{"type":"boolean"}},
+      {"name":"ORGANIZATIONID","type":{"type":"int"}},
+      {"name":"CREATEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"UPDATEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"REVIEWPAGEURL","type":{"type":"string"}},
+      {"name":"USERID","type":{"type":"string"}},
+      {"name":"TEST","type":{"type":"string"}},
+      {"name":"LOCATIONID","type":{"type":"int"}},
+      {"name":"CUSTOMERID","type":{"type":"int"}},
+      {"name":"EMAIL","type":{"type":"string"}}
+    ]
+  }

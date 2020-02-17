@@ -1,0 +1,80 @@
+  {
+    "namespace": "Logic-Plum",
+    "type": "object",
+    "name": "book-to-show-scores",
+    "country_code": "USA",
+    "estimated_row_size": "10b",
+    "estimated_row_count": 3000,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "MARKETING",
+        "table_name": "BOOK_TO_SHOW_SCORES",
+        "schema": "LOGIC_PLUM",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "BOOK_TO_SHOW_SCORES",
+        "schema": "LOGIC_PLUM",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "ExactTarget_sink_0",
+        "endpoint_type": "sink",
+        "host": "66.231.91.46",
+        "port": 22,
+        "path": "Import/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "file_regex": "SDC_predictions.*csv",
+          "headers": true
+        },
+        "credentials": {
+          "type": "awssecrets",
+          "name": "exact-target/sftp"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "s3",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "bucket": "logicplum-assets",
+        "prefix": "logicplum_predictions/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "SDC_predictions.*csv"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"FIRST_SCAN_ITEM_ID","type":{"type":"string"}},
+      {"name":"BOOK_TO_SHOW_SCORE","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

@@ -1,0 +1,20 @@
+{
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "schedule-request",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "TIME_MANAGEMENT_SCHEDULE_REQUEST", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://knw12.ulticlock.com/UtmOdataServices/api"},
+    "fields": [
+      {"name":"ID","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"DESCRIPTION","type":{"type":"string"}},
+      {"name":"START","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"END","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"PAYCODEID","type":{"type":"int"}},
+      {"name":"SUBMITTED","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"DAYS","type":{"type":"int"}},
+      {"name":"NOTES","type":{"type":"string"}},
+      {"name":"EMPLOYEEID","type":{"type":"int"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+}

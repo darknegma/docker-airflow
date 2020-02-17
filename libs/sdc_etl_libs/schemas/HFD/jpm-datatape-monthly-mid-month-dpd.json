@@ -1,0 +1,109 @@
+  {
+    "namespace": "HFD",
+    "type": "object",
+    "name": "jpm-datatape-monthly-mid-month-dpd",
+    "country_code": "USA",
+    "estimated_row_size": "0",
+    "estimated_row_count": 0,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "FINANCE",
+        "table_name": "JPM_DATATAPE_MONTHLY_MID_MONTH_DPD",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "JPM_DATATAPE_MONTHLY_MID_MONTH_DPD",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "s3",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "region": "us-east-2",
+        "bucket": "sdc-hfd",
+        "prefix": "sdc-hfd/jpm_data_tape_midmonth_dpd/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": ".*"
+        }
+      }
+    ],
+
+
+    "fields": [
+      {"name":"HFDID","type":{"type":"string"}},
+      {"name":"CASENUMBER","type":{"type":"string"}},
+      {"name":"ORDERDATE","type":{"type":"string"}},
+      {"name":"DOCDYM","type":{"type":"string"}},
+      {"name":"STATE","type":{"type":"string"}},
+      {"name":"ACTIVATEDATE","type":{"type":"string"}},
+      {"name":"ACTIVATEDYM","type":{"type":"string"}},
+      {"name":"TERM","type":{"type":"string"}},
+      {"name":"MATURITYDATE","type":{"type":"string"}},
+      {"name":"MONTHLYPMT","type":{"type":"string"}},
+      {"name":"INTERESTRATE","type":{"type":"string"}},
+      {"name":"FINANCEDAMOUNT","type":{"type":"string"}},
+      {"name":"REPORTMONTH","type":{"type":"string"}},
+      {"name":"PAYMENTSTATUS","type":{"type":"string"}},
+      {"name":"AGEATDOCDATE","type":{"type":"string"}},
+      {"name":"DAYSPASTDUE","type":{"type":"string"}},
+      {"name":"DAYSPASTDUENEW","type":{"type":"string"}},
+      {"name":"REFUNDAMOUNT","type":{"type":"string"}},
+      {"name":"CANCELLEDAMOUNT","type":{"type":"string"}},
+      {"name":"TOTALPAYMENTAMOUNT","type":{"type":"string"}},
+      {"name":"PRINCIPALPAYMENT","type":{"type":"string"}},
+      {"name":"INTERESTPAYMENT","type":{"type":"string"}},
+      {"name":"ADJUSTMENTAMOUNT","type":{"type":"string"}},
+      {"name":"WRITEOFFAMOUNT","type":{"type":"string"}},
+      {"name":"ENDINGPRINCIPALBALANCE","type":{"type":"string"}},
+      {"name":"NETRECOVERYAOUNT","type":{"type":"string"}},
+      {"name":"CUSTPRODTYPE","type":{"type":"string"}},
+      {"name":"LOANMODFLAG","type":{"type":"string"}},
+      {"name":"LOANMODDATE","type":{"type":"string"}},
+      {"name":"TESTPRODFLAG","type":{"type":"string"}},
+      {"name":"ORIGINATIONS","type":{"type":"string"}},
+      {"name":"BEGBAL","type":{"type":"string"}},
+      {"name":"CANCELDATE","type":{"type":"string"}},
+      {"name":"WRITEOFFDATE","type":{"type":"string"}},
+      {"name":"ACTIVESERVICING","type":{"type":"string"}},
+      {"name":"LASTPAYMENTDATE","type":{"type":"string"}},
+      {"name":"NEXTPAYMENTDATE","type":{"type":"string"}},
+      {"name":"PMTSPASTDUE","type":{"type":"string"}},
+      {"name":"HISTPMTSTATUS","type":{"type":"string"}},
+      {"name":"AMORTFIRSTPMTDATE","type":{"type":"string"}},
+      {"name":"FIRSTRECDPAYMENTDATE","type":{"type":"string"}},
+      {"name":"RFENDBALANCE","type":{"type":"string"}},
+      {"name":"RFTEST","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string", "logical_type":"datetime", "add_column": true }}
+    ]
+  }
+
+
+
+

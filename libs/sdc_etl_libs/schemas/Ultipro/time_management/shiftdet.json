@@ -1,0 +1,21 @@
+{
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "shiftdet",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "TIME_MANAGEMENT_SHIFTDET", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://knw12.ulticlock.com/UtmOdataServices/api"},
+  "fields": [
+    {"name":"ID","type":{"type":"int"},"sf_merge_key": true},
+    {"name":"SHIFTNUM","type":{"type":"float"}},
+    {"name":"DAYLIST","type":{"type":"float"}},
+    {"name":"DAYDESC","type":{"type":"string"}},
+    {"name":"WORKDAY","type":{"type":"boolean"}},
+    {"name":"DAYSTART","type":{"type":"string"}},
+    {"name":"DAYEND","type":{"type":"string"}},
+    {"name":"START","type":{"type":"string"}},
+    {"name":"END","type":{"type":"string"}},
+    {"name":"LUNCH","type":{"type":"float"}},
+    {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+  ]
+}

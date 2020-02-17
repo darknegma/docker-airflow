@@ -1,0 +1,24 @@
+  {
+    "namespace": "Podium",
+    "type": "object",
+    "name": "reviews",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "MARKETING", "table_name": "REVIEWS_PII", "schema": "PODIUM"},
+    "data_source": {"type": "api", "base_url": "https://podium.co/api/v2/"},
+    "fields": [
+      {"name":"ID","type":{"type":"int"}, "sf_merge_key": true},
+      {"name":"SITEREVIEWID","type":{"type":"string"}},
+      {"name":"SITENAME","type":{"type":"string"}},
+      {"name":"AUTHORID","type":{"type":"string"}},
+      {"name":"REVIEWBODY","type":{"type":"string"}},
+      {"name":"RATING","type":{"type":"float"}},
+      {"name":"PUBLISHDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"REVIEWURL","type":{"type":"string"}},
+      {"name":"LOCATIONID","type":{"type":"int"}},
+      {"name":"AUTHOR","type":{"type":"string"}},
+      {"name":"CREATEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"UPDATEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"REVIEWINVITATIONID","type":{"type":"string"}},
+      {"name":"REVIEWINVITATIONUID","type":{"type":"string"}}
+    ]
+  }

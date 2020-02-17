@@ -1,0 +1,19 @@
+  {
+    "namespace": "ExactTarget",
+    "type": "object",
+    "name": "list_subscribers",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "MARKETING", "table_name": "LIST_SUBSCRIBERS_PII", "schema": "EXACTTARGET"},
+    "data_source": {"type": "api"},
+    "fields": [
+      {"name":"CLIENT_ID","type":{"type":"string"}},
+      {"name":"PARTNERKEY","type":{"type":"string"}},
+      {"name":"CREATEDDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"MODIFIEDDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"ID","type":{"type":"string"},"sf_merge_key": true},
+      {"name":"OBJECTID","type":{"type":"string"}},
+      {"name":"STATUS","type":{"type":"string"}},
+      {"name":"LISTID","type":{"type":"string"}},
+      {"name":"SUBSCRIBERKEY","type":{"type":"string"}}
+    ]
+  }

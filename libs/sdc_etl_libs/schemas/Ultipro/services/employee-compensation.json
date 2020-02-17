@@ -1,0 +1,26 @@
+  {
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "employee-compensation",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "SERVICE_EMPLOYEE_COMPENSATION_PII", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://service5.ultipro.com/services/"},
+  "fields": [
+    {"name":"FIRSTNAME","type":{"type":"string"}},
+    {"name":"LASTNAME","type":{"type":"string"}},
+    {"name":"ANNUAL","type":{"type":"float"}},
+    {"name":"EFFECTIVEDATE","type":{"type":"string", "logical_type":"datetime"}},
+    {"name":"COMPANYCODE","type":{"type":"string"}, "sf_merge_key": true},
+    {"name":"EMPLOYEENUMBER","type":{"type":"string"}, "sf_merge_key": true},
+    {"name":"HOURLY","type":{"type":"float"}},
+    {"name":"PAYFREQUENCY","type":{"type":"string"}},
+    {"name":"PAYGROUP","type":{"type":"string"}},
+    {"name":"PERCENTCHANGE","type":{"type":"float"}},
+    {"name":"PERIOD","type":{"type":"float"}},
+    {"name":"RATECHANGETYPE","type":{"type":"string"}},
+    {"name":"REASONCODE","type":{"type":"string"}},
+    {"name":"SCHEDULEDHOURS","type":{"type":"float"}},
+    {"name":"WEEKLY","type":{"type":"float"}},
+    {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+  ]
+  }

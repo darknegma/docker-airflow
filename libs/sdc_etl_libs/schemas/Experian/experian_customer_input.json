@@ -1,0 +1,66 @@
+  {
+    "namespace": "Experian",
+    "type": "object",
+    "name": "demographics",
+    "country_code": "USA",
+    "data_sink":[
+        {
+        "type": "sftp",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "host": "ftp.smileco.com",
+        "port": 22,
+        "path": "/prod/tracking/Processed/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "experian/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "headers": true,
+          "file_name": "experian_customer_input.csv"
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "alternate_sink_0",
+        "endpoint_type": "sink",
+        "bucket": "sdc-emr",
+        "prefix": "",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": ".txt",
+          "file_name": "experian_customer_input.csv"
+        }
+      }
+        ],
+    "data_source": [{
+        "type": "snowflake",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "database": "MARKETING",
+        "table_name": "EXPERIAN_PIPE_DELIM_PII",
+        "schema": "EXPERIAN",
+        "write_filename_to_db": false,
+        "sql_file_path": "Experian/customer_input.sql",
+        "upsert": false,
+        "credentials": {
+           "type": "awssecrets",
+           "name": "snowflake/udai"
+        }
+    }],
+    "fields": [
+      {"name": "CLIENT_ID", "type": {"type":"string"}, "is_nullable": "true"},
+      {"name": "UE_MATCH_LVL", "type": {"type":"string"}, "is_nullable": "true"},
+      {"name": "UE_MATCH_ADD", "type": {"type":"string"}, "is_nullable": "true"}
+    ]
+  }
+
+
+
+
+

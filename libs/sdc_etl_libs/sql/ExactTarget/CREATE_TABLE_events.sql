@@ -1,0 +1,25 @@
+create or replace table "EVENTS_PII" (
+    "SENDID" number,
+    "OBJECTID" varchar,
+    "EVENTDATE" datetime,
+    "EVENTTYPE" varchar,
+    "SUBSCRIBERKEY" varchar,
+    "CLIENT_ID" varchar,
+    "BATCHID" number,
+    "TRIGGEREDSENDDEFINITIONOBJECTID" varchar,
+    "SMTPCODE" int,
+    "BOUNCECATEGORY" varchar,
+    "SMTPREASON" varchar,
+    "BOUNCETYPE" varchar,
+    "BOUNCESUBCATEGORY" varchar,
+    "URL" varchar,
+    "CLICKURL" varchar,
+    "CLICKLINKNAME" varchar,
+    "CLICKLINKCONTENT" varchar,
+    "URLID" varchar,
+    "ID" varchar,
+    "CREATEDDATE" varchar,
+    "ALIAS" varchar,
+    "PARTNERKEY" varchar);
+
+

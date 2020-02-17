@@ -1,0 +1,24 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "charge-revisions",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "CHARGE_REVISIONS", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"STARTDATE","type":{"type":"string","logical_type":"datetime"}, "is_nullable": true},
+      {"name":"STATUS","type":{"type":"string"}},
+      {"name":"CHANGETYPE","type":{"type":"string"}},
+      {"name":"LASTMODIFIEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"LASTMODIFIEDBY","type":{"type":"string"}},
+      {"name":"PROJECT","type":{"type":"string","logical_type":"json"}},
+      {"name":"WBS","type":{"type":"string","logical_type":"json"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"CHARGEKEY","type":{"type":"int"}},
+      {"name":"CODE","type":{"type":"string"}},
+      {"name":"DESCRIPTION","type":{"type":"string"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

@@ -1,0 +1,83 @@
+  {
+    "namespace": "TrueVault",
+    "type": "object",
+    "name": "dental-health-questionnaire",
+    "country_code": "USA",
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "MEDICAL_DATA",
+        "table_name": "DENTAL_HEALTH_QUESTIONNAIRE_PII",
+        "schema": "TRUEVAULT",
+        "upsert": true,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "DENTAL_HEALTH_QUESTIONNAIRE_PII",
+        "schema": "TRUEVAULT",
+        "upsert": true,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source":
+      {
+        "type": "api",
+        "base_url": "https://api.truevault.com/v2/vaults",
+        "vault_id": "b2ed94e2-b680-4192-9ad0-f7c1be628973",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "truevault/api"
+        }
+      },
+    "fields": [
+      {"name":"EXTERNAL_KEY","type":{"type":"string"}, "is_nullable": true, "sf_merge_key": true},
+      {"name":"FEELS-PAIN","type":{"type":"string"}, "is_nullable": true},
+      {"name":"FEELS-PAIN-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAD-BONE-MARROW-TRANSPLANT","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAD-BONE-MARROW-TRANSPLANT-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-ALLERGIES","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-ALLERGIES-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-BISPHOSPHONATES","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-BISPHOSPHONATES-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-BONDED-RETAINER","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-BONDED-RETAINER-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-BRIDGEWORK","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-BRIDGEWORK-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-CROWNS","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-HEAD-INJURY","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-HEAD-INJURY-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-IMPACTED-TOOTH","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-IMPACTED-TOOTH-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-IMPLANT","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-IMPLANT-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-JAW-CLICKING","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-JAW-CLICKING-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-LOOSENING","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-LOOSENING-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-PRIMARY-TEETH","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-PRIMARY-TEETH-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-SORES","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-SORES-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-VENEERS","type":{"type":"string"}, "is_nullable": true},
+      {"name":"ON-CORTICOSTEROIDS","type":{"type":"string"}, "is_nullable": true},
+      {"name":"ON-CORTICOSTEROIDS-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"SELECTED_BONDED_TREATMENT","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-RADIOGRAPH","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-CROWNS-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-RADIOGRAPH-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"HAS-VENEERS-DETAIL","type":{"type":"string"}, "is_nullable": true},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string", "logical_type":"datetime", "add_column": true }}
+    ]
+  }

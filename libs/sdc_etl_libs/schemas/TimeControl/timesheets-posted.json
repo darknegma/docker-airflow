@@ -1,0 +1,22 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "timesheets-posted",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "TIMESHEETS_POSTED_PII", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"STATUS","type":{"type":"string"}},
+      {"name":"STORE","type":{"type":"string"}},
+      {"name":"EMPLOYEE","type":{"type":"string","logical_type":"json"}},
+      {"name":"PERIOD","type":{"type":"string","logical_type":"json"}},
+      {"name":"TOTALMINUTES","type":{"type":"float"}},
+      {"name":"TIMESHEETTYPE","type":{"type":"string"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }
+
+

@@ -1,0 +1,107 @@
+{
+  "namespace": "ANALYTICS",
+  "type": "object",
+  "name": "events",
+  "country_code": "USA",
+  "estimated_row_size": "40b",
+  "estimated_row_count": 500,
+ "data_sink": [
+      {
+        "type": "s3",
+        "endpoint_type": "sink",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "tnt/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "file_regex": ".*ECS",
+          "headers": false
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "SDC_sink_1",
+        "endpoint_type": "sink",
+        "host": "66.231.91.46",
+        "port": 22,
+        "path": "Import/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "secrewtname"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "file_regex": ".*ECS",
+          "headers": false
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_1",
+        "endpoint_type": "sink",
+        "database": "LOGISTICS",
+        "table_name": "TRACKING_EVENTS",
+        "schema": "TNT",
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "secrewtname"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "endpoint_type": "source",
+        "host": "ftp.smileco.com",
+        "port": 22,
+        "path": "/prod/tracking/Processed/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "tnt/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "headers": false,
+          "file_regex": ".*ECS"
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "alternate_source_0",
+        "endpoint_type": "source",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "tnt/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": "|",
+          "headers": false,
+          "file_regex": ".*ECS"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"ID1","type":{"type":"string"}},
+      {"name":"ID2","type":{"type":"string"}},
+      {"name":"ID3","type":{"type":"string"}},
+      {"name":"ID4","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"ID5","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"ID6","type":{"type":"int"}},
+      {"name":"ID7","type":{"type":"int"}},
+      {"name":"ID8","type":{"type":"float"}},
+      {"name":"ID9","type":{"type":"float"}},
+      {"name":"ID10","type":{"type":"string"}},
+      {"name":"ID11","type":{"type":"string"}},
+      {"name":"ID12","type":{"type":"string"}},
+      {"name":"ID13","type":{"type":"string"}},
+      {"name":"ID14","type":{"type":"string"}},
+      {"name":"ID15","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

@@ -1,0 +1,227 @@
+  {
+    "namespace": "Fedex",
+    "type": "object",
+    "name": "tracking-events",
+    "country_code": "USA",
+    "estimated_row_size": "40b",
+    "estimated_row_count": 500,
+    "data_sink": [
+      {
+        "type": "s3",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "fedex/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "file",
+          "file_regex": "SMILEDIRECT_.*"
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "fedex_test/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "file",
+          "file_regex": "SMILEDIRECT_.*"
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "ExactTarget_sink_0",
+        "endpoint_type": "sink",
+        "host": "66.231.91.46",
+        "port": 22,
+        "path": "Import/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "exact-target/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "SMILEDIRECT_.*"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_1",
+        "endpoint_type": "sink",
+        "database": "LOGISTICS",
+        "table_name": "TRACKING_EVENTS",
+        "schema": "FEDEX",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_1_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "TRACKING_EVENTS",
+        "schema": "FEDEX",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "host": "prod.ec.fedex.com",
+        "port": 60022,
+        "path": "/SMILEDIRECT/INSIGHTCSV/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "fedex/sftp"
+        },
+        "file_info": {
+          "type": "file",
+          "file_regex": "SMILEDIRECT_.*"
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "alternate_source_0",
+        "endpoint_type": "source",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "fedex/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "SMILEDIRECT_.*"
+        }
+      },
+      {
+        "type": "s3",
+        "tag": "alternate_source_1",
+        "endpoint_type": "source",
+        "bucket": "sdc-shipment-tracking",
+        "prefix": "fedex/",
+        "region": "us-east-2",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "SMILEDIRECT_[0-9]{6}_[0-9]{4}202[0-9].*"
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "main_source_dev",
+        "endpoint_type": "source",
+        "host": "66.231.91.46",
+        "port": 22,
+        "path": "Import/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "exact-target/sftp"
+        },
+        "file_info": {
+          "type": "file",
+          "file_regex": "SMILEDIRECT_.*"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"RTYPE","type":{"type":"string"}},
+      {"name":"CCODE","type":{"type":"string"}},
+      {"name":"TPIDC","type":{"type":"string"}},
+      {"name":"TRCK#","type":{"type":"string"}},
+      {"name":"FILL1","type":{"type":"string"}},
+      {"name":"MTRK#","type":{"type":"string"}},
+      {"name":"FILL2","type":{"type":"string"}},
+      {"name":"SHIPD","type":{"type":"string"}},
+      {"name":"ESTDD","type":{"type":"string"}},
+      {"name":"ESTDT","type":{"type":"string"}},
+      {"name":"DELVD","type":{"type":"string"}},
+      {"name":"DELVT","type":{"type":"string"}},
+      {"name":"PODNM","type":{"type":"string"}},
+      {"name":"OCODE","type":{"type":"string"}},
+      {"name":"DCODE","type":{"type":"string"}},
+      {"name":"STATD","type":{"type":"string"}},
+      {"name":"STATC","type":{"type":"string"}},
+      {"name":"FILL3","type":{"type":"string"}},
+      {"name":"SHPRN","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPCO","type":{"type":"string"}},
+      {"name":"SHPA1","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPA2","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPA3","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPRC","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPRS","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPCC","type":{"type":"string"}, "is_pii": true},
+      {"name":"SHPRZ","type":{"type":"string"}},
+      {"name":"ACCT#","type":{"type":"string"}},
+      {"name":"SIREF","type":{"type":"string"}},
+      {"name":"RCPTN","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPCO","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPA1","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPA2","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPA3","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPTC","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPTS","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPTZ","type":{"type":"string"}, "is_pii": true},
+      {"name":"RCPCC","type":{"type":"string"}, "is_pii": true},
+      {"name":"FILL4","type":{"type":"string"}},
+      {"name":"SVCCD","type":{"type":"string"}},
+      {"name":"PKGCD","type":{"type":"string"}},
+      {"name":"TRPAY","type":{"type":"string"}},
+      {"name":"DTPAY","type":{"type":"string"}},
+      {"name":"TYPCD","type":{"type":"string"}},
+      {"name":"FILL5","type":{"type":"string"}},
+      {"name":"PIECS","type":{"type":"string"}},
+      {"name":"UOMCD","type":{"type":"string"}},
+      {"name":"DIMCD","type":{"type":"string"}},
+      {"name":"FILL6","type":{"type":"string"}},
+      {"name":"PKGLN","type":{"type":"string"}},
+      {"name":"PKGWD","type":{"type":"string"}},
+      {"name":"PKGHT","type":{"type":"string"}},
+      {"name":"POREF","type":{"type":"string"}},
+      {"name":"INREF","type":{"type":"string"}},
+      {"name":"DEPT#","type":{"type":"string"}},
+      {"name":"SHPID","type":{"type":"string"}},
+      {"name":"LBWGT","type":{"type":"string"}},
+      {"name":"KGWGT","type":{"type":"string"}},
+      {"name":"DEXCD","type":{"type":"string"}},
+      {"name":"SCODE","type":{"type":"string"}},
+      {"name":"TCN#","type":{"type":"string"}},
+      {"name":"BOL#","type":{"type":"string"}},
+      {"name":"PC#1","type":{"type":"string"}},
+      {"name":"PC#2","type":{"type":"string"}},
+      {"name":"RMA#","type":{"type":"string"}},
+      {"name":"APPTD","type":{"type":"string"}},
+      {"name":"APPTT","type":{"type":"string"}},
+      {"name":"ECITY","type":{"type":"string"}},
+      {"name":"EVEST","type":{"type":"string"}},
+      {"name":"EVECO","type":{"type":"string"}},
+      {"name":"CDRC1","type":{"type":"string"}},
+      {"name":"CDRC2","type":{"type":"string"}},
+      {"name":"AINFO","type":{"type":"string"}},
+      {"name":"SPHC1","type":{"type":"string"}},
+      {"name":"SPHC2","type":{"type":"string"}},
+      {"name":"SPHC3","type":{"type":"string"}},
+      {"name":"SPHC4","type":{"type":"string"}},
+      {"name":"RCPT#","type":{"type":"string"}, "is_pii": true},
+      {"name":"FILL7","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

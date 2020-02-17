@@ -1,0 +1,25 @@
+
+create table "EMPLOYEES_PII" (
+	"BANKS" variant,
+	"STARTDATE" datetime,
+	"FINISHDATE" datetime,
+	"PRELOADRESOURCEASSIGNMENTS" boolean,
+	"PRELOADPERSONALASSIGNMENTS" boolean,
+	"DOPRELOAD" boolean,
+	"ISINACTIVE" boolean,
+	"LASTMODIFIEDAT" datetime,
+	"LASTMODIFIEDBY" varchar,
+	"RESOURCEPRELOADFILTERKEY" int,
+	"TIMESHEETPERIODGROUP" variant,
+	"RATE" variant,
+	"RESOURCE" variant,
+	"CANCOPYTIMESHEETHOURS" boolean,
+	"USERFIELDS" variant,
+	"FIRSTNAME" varchar,
+	"LASTNAME" varchar,
+	"_METADATA" variant,
+	"KEY" int,
+	"CODE" varchar,
+	"NAME" varchar,
+	"_SF_INSERTEDDATETIME" datetime
+);

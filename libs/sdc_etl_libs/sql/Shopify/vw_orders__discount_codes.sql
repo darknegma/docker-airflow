@@ -1,0 +1,14 @@
+CREATE OR REPLACE VIEW "WEB_DATA"."SHOPIFY"."VW_ORDERS__DISCOUNT_CODES" COPY GRANTS AS (
+
+SELECT
+
+    o."ID" AS "ORDER_ID",
+    f1.value:amount::float as "DISCOUNT_CODES__AMOUNT",
+    upper(f1.value:code::string) as "DISCOUNT_CODES__CODE",
+    f1.value:type::string as "DISCOUNT_CODES__TYPE"
+
+FROM "RAW"."STITCH_SHOPIFY_NEW"."ORDERS" o
+LEFT JOIN "DATAENG_UTILS"."MAPPINGS"."PII_MAPPINGS" PII ON PII.ROLE = CURRENT_ROLE()
+, lateral flatten(input => parse_json(DISCOUNT_CODES)) f1
+
+);

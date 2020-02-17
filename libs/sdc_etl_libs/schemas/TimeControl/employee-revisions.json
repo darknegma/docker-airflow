@@ -1,0 +1,25 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "employee-revisions",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "EMPLOYEE_REVISIONS_PII", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"STARTDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"FINISHDATE","type":{"type":"string","logical_type":"datetime"}, "is_nullable": true},
+      {"name":"RESOURCE","type":{"type":"string","logical_type":"json"}},
+      {"name":"CHANGETYPE","type":{"type":"string"}},
+      {"name":"LASTMODIFIEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"LASTMODIFIEDBY","type":{"type":"string"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"EMPLOYEEKEY","type":{"type":"int"}},
+      {"name":"CODE","type":{"type":"int"}},
+      {"name":"FIRSTNAME","type":{"type":"string"}},
+      {"name":"LASTNAME","type":{"type":"string"}},
+      {"name":"NAME","type":{"type":"string"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

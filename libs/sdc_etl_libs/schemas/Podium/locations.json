@@ -1,0 +1,22 @@
+  {
+    "namespace": "Podium",
+    "type": "object",
+    "name": "locations",
+    "country_code": "USA",
+    "data_sink": {
+      "type": "snowflake",
+      "database": "MARKETING",
+      "table_name": "LOCATIONS",
+      "schema": "PODIUM",
+      "upsert": false,
+      "dedupe": true
+    },
+    "data_source": {
+      "type": "api",
+      "base_url": "https://podium.co/api/v2/"
+    },
+    "fields": [
+      {"name":"LOCATIONID","type":{"type":"int"}, "sf_merge_key": true},
+      {"name":"LOCATIONNAME","type":{"type":"string"}}
+    ]
+  }

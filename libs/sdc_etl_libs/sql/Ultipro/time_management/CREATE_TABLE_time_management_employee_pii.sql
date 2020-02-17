@@ -1,0 +1,31 @@
+create table "TIME_MANAGEMENT_EMPLOYEE_PII"
+(
+    "ID"                   int,
+    "EMPID"                varchar,
+    "CARDNUM"              int,
+    "SUPID"                varchar,
+    "SUPNAME"              varchar,
+    "FIRSTNAME"            varchar,
+    "LASTNAME"             varchar,
+    "ACTIVE"               varchar,
+    "EMAIL"                varchar,
+    "BIRTHDATE"            datetime,
+    "HIREDATE"             datetime,
+    "PAYMETHOD"            int,
+    "PAYTYPE"              int,
+    "HOLIRULE"             int,
+    "PAYCATE"              varchar,
+    "PAYGROUPID"           int,
+    "LOCATIONID"           int,
+    "JOBID"                int,
+    "PROJECTID"            int,
+    "ORGLEVEL1ID"          int,
+    "ORGLEVEL2ID"          int,
+    "ORGLEVEL3ID"          int,
+    "ORGLEVEL4ID"          int,
+    "PAYPOLICYID"          int,
+    "SHIFTID"              int,
+    "ACCESSGROUPID"        int,
+    "_SF_INSERTEDDATETIME" datetime
+
+);

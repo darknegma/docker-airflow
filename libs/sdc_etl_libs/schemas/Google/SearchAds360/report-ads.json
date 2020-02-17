@@ -1,0 +1,59 @@
+  {
+    "namespace": "SearchAds360",
+    "type": "object",
+    "name": "report-ads",
+    "country_code": "USA",
+    "data_sink": [
+        {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "MARKETING",
+        "table_name": "REPORT_ADS",
+        "schema": "GOOGLE_SEARCH_ADS_360",
+        "upsert": true,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+        {"type": "api"}
+    ],
+    "fields": [
+        {"name":"status","type":{"type":"string"},"is_nullable": true},
+        {"name":"engineStatus","type":{"type":"string"},"is_nullable": true},
+        {"name":"creationTimestamp","type":{"type":"string", "logical_type":"datetime"},"is_nullable": true},
+        {"name":"lastModifiedTimestamp","type":{"type":"string", "logical_type":"datetime"},"is_nullable": true},
+        {"name":"agency","type":{"type":"string"},"is_nullable": true},
+        {"name":"agencyId","type":{"type":"string"},"is_nullable": true},
+        {"name":"advertiser","type":{"type":"string"},"is_nullable": true},
+        {"name":"advertiserId","type":{"type":"string"},"is_nullable": true},
+        {"name":"account","type":{"type":"string"},"is_nullable": true},
+        {"name":"accountId","type":{"type":"string"},"is_nullable": true},
+        {"name":"accountEngineId","type":{"type":"string"},"is_nullable": true},
+        {"name":"accountType","type":{"type":"string"},"is_nullable": true},
+        {"name":"campaign","type":{"type":"string"},"is_nullable": true},
+        {"name":"campaignId","type":{"type":"string"},"is_nullable": true},
+        {"name":"campaignStatus","type":{"type":"string"},"is_nullable": true},
+        {"name":"adGroup","type":{"type":"string"},"is_nullable": true},
+        {"name":"adGroupId","type":{"type":"string"},"is_nullable": true, "sf_merge_key": true},
+        {"name":"ad","type":{"type":"string"},"is_nullable": true},
+        {"name":"adId","type":{"type":"string"},"is_nullable": true, "sf_merge_key": true},
+        {"name":"isUnattributedAd","type":{"type":"boolean"},"is_nullable": true},
+        {"name":"adHeadline","type":{"type":"string"},"is_nullable": true},
+        {"name":"adType","type":{"type":"string"},"is_nullable": true},
+        {"name":"clicks","type":{"type":"int"},"is_nullable": true},
+        {"name":"cost","type":{"type":"float"},"is_nullable": true},
+        {"name":"impr","type":{"type":"int"},"is_nullable": true},
+        {"name":"adWordsConversions","type":{"type":"string"},"is_nullable": true},
+        {"name":"adWordsConversionValue","type":{"type":"string"},"is_nullable": true},
+        {"name":"adWordsViewThroughConversions","type":{"type":"int"},"is_nullable": true},
+        {"name":"visits","type":{"type":"int"},"is_nullable": true},
+        {"name":"date","type":{"type":"string", "logical_type":"datetime"},"is_nullable": true, "sf_merge_key": true},
+        {"name":"deviceSegment","type":{"type":"string"},"is_nullable": true, "sf_merge_key": true},
+        {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }
+

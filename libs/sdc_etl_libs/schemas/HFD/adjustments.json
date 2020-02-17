@@ -1,0 +1,64 @@
+  {
+    "namespace": "HFD",
+    "type": "object",
+    "name": "adjustments",
+    "country_code": "USA",
+    "estimated_row_size": "0",
+    "estimated_row_count": 0,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "FINANCE",
+        "table_name": "ADJUSTMENTS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "ADJUSTMENTS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "s3",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "region": "us-east-2",
+        "bucket": "sdc-hfd",
+        "prefix": "sdc-hfd/adjustments/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": ".*"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"HFDID","type":{"type":"int"}},
+      {"name":"ADJUSTMENTDATE","type":{"type":"string", "logical_type":"datetime"}},
+      {"name":"ADJUSTMENTAMOUNT","type":{"type":"float"}},
+      {"name":"PROVIDERID","type":{"type":"int"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string", "logical_type":"datetime", "add_column": true }}
+    ]
+  }

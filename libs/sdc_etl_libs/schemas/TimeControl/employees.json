@@ -1,0 +1,35 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "employees",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "EMPLOYEES_PII", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"BANKS","type":{"type":"string", "logical_type":"json"}},
+      {"name":"STARTDATE","type":{"type":"string", "logical_type":"datetime"}},
+      {"name":"FINISHDATE","type":{"type":"string", "logical_type":"datetime"},"is_nullable": true},
+      {"name":"PRELOADRESOURCEASSIGNMENTS","type":{"type":"boolean"}},
+      {"name":"PRELOADPERSONALASSIGNMENTS","type":{"type":"boolean"}},
+      {"name":"DOPRELOAD","type":{"type":"boolean"}},
+      {"name":"ISINACTIVE","type":{"type":"boolean"}},
+      {"name":"LASTMODIFIEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"LASTMODIFIEDBY","type":{"type":"string"}},
+      {"name":"RESOURCEPRELOADFILTERKEY","type":{"type":"int"}},
+      {"name":"TIMESHEETPERIODGROUP","type":{"type":"string","logical_type":"json"}},
+      {"name":"RATE","type":{"type":"string","logical_type":"json"}},
+      {"name":"RESOURCE","type":{"type":"string","logical_type":"json"}},
+      {"name":"CANCOPYTIMESHEETHOURS","type":{"type":"boolean"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"FIRSTNAME","type":{"type":"string"}},
+      {"name":"LASTNAME","type":{"type":"string"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"CODE","type":{"type":"string"}},
+      {"name":"NAME","type":{"type":"string"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }
+
+
+

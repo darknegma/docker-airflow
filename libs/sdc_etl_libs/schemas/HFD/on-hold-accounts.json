@@ -1,0 +1,69 @@
+  {
+    "namespace": "HFD",
+    "type": "object",
+    "name": "on-hold-accounts",
+    "country_code": "USA",
+    "estimated_row_size": "0",
+    "estimated_row_count": 0,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "FINANCE",
+        "table_name": "ON_HOLD_ACCOUNTS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "ON_HOLD_ACCOUNTS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "s3",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "region": "us-east-2",
+        "bucket": "sdc-hfd",
+        "prefix": "sdc-hfd/on_hold_accounts/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": ".*"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"HFDID","type":{"type":"string"}},
+      {"name":"PATIENTID","type":{"type":"string"}},
+      {"name":"PROVIDERID","type":{"type":"string"}},
+      {"name":"PAYMENTSTATUS","type":{"type":"string"}},
+      {"name":"DETAILSTATUS","type":{"type":"string"}},
+      {"name":"EMAIL","type":{"type":"string"}},
+      {"name":"PRIMARYPHONE","type":{"type":"string"}},
+      {"name":"HOLDDATE","type":{"type":"string"}},
+      {"name":"DAYSONHOLD","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

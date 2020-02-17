@@ -1,0 +1,116 @@
+  {
+    "namespace": "ICIMS",
+    "type": "object",
+    "name": "jobs-pii",
+    "country_code": "USA",
+    "estimated_row_size": "45b",
+    "estimated_row_count": 1000,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "HRIS_DATA",
+        "table_name": "CANDIDATE_WORKFLOW_PII",
+        "schema": "ICIMS",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "CANDIDATE_WORKFLOW_PII",
+        "schema": "ICIMS",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "host": "ftp.icims.com",
+        "port": 22,
+        "path": "Outbound/CandidateRW/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "export_Candidate_Workflow.*csv"
+        },
+        "credentials": {
+          "type": "awssecrets",
+          "name": "icims/sftp"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"Recruiting Workflow Profile (Person Full Name: First, Last Label)","type":{"type":"string"},"is_nullable": true, "is_pii":  true},
+      {"name":"Updated Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Submittal ID","type":{"type":"int"},"is_nullable": true},
+      {"name":"Person : System ID","type":{"type":"int"},"is_nullable": true},
+      {"name":"Job : System ID","type":{"type":"int"},"is_nullable": true},
+      {"name":"Job : Vacancy Reason","type":{"type":"string"}, "is_nullable": true},
+      {"name":"Status","type":{"type":"string"},"is_nullable": true},
+      {"name":"Bin","type":{"type":"string"},"is_nullable": true},
+      {"name":"Submittal/Rejection Note : Message (HTML)","type":{"type":"string"},"is_nullable": true},
+      {"name":"Application Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Bin HR/Recruiter Review","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Bin Hiring Manager Review","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Bin Hired","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Person : Start Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Person : Employee #","type":{"type":"string"},"is_nullable": true},
+      {"name":"Person : Hire Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Person : Source","type":{"type":"string"},"is_nullable": true},
+      {"name":"Person : Source Channel","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source Person : Full Name: First Last","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source Channel","type":{"type":"string"},"is_nullable": true},
+      {"name":"# Currently in Status Hired: Hired","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hiring Manager Review: Interviewed; Not Selected","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hiring Manager Review: Reviewed; Not Selected","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status HR/Recruiter Review: Interviewed; Not Selected","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status HR/Recruiter Review: Reviewed; Not Selected","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Offer: Offer Declined/Rejected","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Offer: Offer Rescinded","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Job : Vacancy Reason","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date Last Placed in Bin Hired","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hired: Sent to Ultipro","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Onboard: ON Launched","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Bin New Submissions","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Offer: Offer Wizard","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Bin Offer","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Source Name","type":{"type":"string"},"is_nullable": true},
+      {"name":"Proposed Start Date","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hiring Leader Screening: Submitted to HM","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hiring Leader Screening: Interview Scheduled","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hiring Leader Screening: Interview Scheduled - In Person","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Person : Updated Audit Timestamp","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Status Hiring Leader Screening: Decision Pending","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Bin Onboard","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Job : Job Posting Category","type":{"type":"string"},"is_nullable": true},
+      {"name":"Offer Amount (Base)","type":{"type":"string"},"is_nullable": true},
+      {"name":"Current Relocation","type":{"type":"string"},"is_nullable": true},
+      {"name":"Sign-on Bonus","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"Initial Annual Bonus %","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"Date First Placed in Status TA Screening: Phone Interview Requested","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status TA Screening: Video Interview Scheduled","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status TA Screening: Reviewed; Not Selected","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Date First Placed in Status New Submissions: Not Considered; Future Potential","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

@@ -1,0 +1,24 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "timesheets-posted-details",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "TIMESHEETS_POSTED_DETAILS_PII", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"BATCH","type":{"type":"string","logical_type":"json"}},
+      {"name":"COSTS","type":{"type":"string","logical_type":"json"}},
+      {"name":"PREMIUMCOSTS","type":{"type":"string","logical_type":"json"}},
+      {"name":"FLAGS","type":{"type":"string","logical_type":"json"}},
+      {"name":"LINE","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"TIMESHEETKEY","type":{"type":"int"}},
+      {"name":"DATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"MINUTES","type":{"type":"float"}},
+      {"name":"DAYNUMBER","type":{"type":"float"}},
+      {"name":"WEEKNUMBER","type":{"type":"float"}},
+      {"name":"HOURS","type":{"type":"string","logical_type":"json"}},
+      {"name":"TOTALHOURS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

@@ -1,0 +1,20 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "reports",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "REPORTS", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"_METADATA","type":{"type":"boolean","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"DESCRIPTION","type":{"type":"string"}},
+      {"name":"TYPE","type":{"type":"string"}},
+      {"name":"TABLE","type":{"type":"string"}, "is_nullable": true},
+      {"name":"FILTERFORCED","type":{"type":"boolean"}, "is_nullable": true},
+      {"name":"FILTERKEY","type":{"type":"int"}, "is_nullable": true},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }
+
+

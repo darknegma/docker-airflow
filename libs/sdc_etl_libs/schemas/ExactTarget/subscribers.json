@@ -1,0 +1,21 @@
+  {
+    "namespace": "ExactTarget",
+    "type": "object",
+    "name": "subscribers",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "MARKETING", "table_name": "SUBSCRIBERS_PII", "schema": "EXACTTARGET"},
+    "data_source": {"type": "api"},
+    "fields": [
+      {"name":"CLIENT_ID","type":{"type":"string"},"is_nullable": true},
+      {"name":"PARTNERKEY","type":{"type":"string"},"is_nullable": true},
+      {"name":"CREATEDDATE","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"UNSUBSCRIBEDDATE","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"ID","type":{"type":"string"}},
+      {"name":"OBJECTID","type":{"type":"string"},"is_nullable": true},
+      {"name":"EMAILADDRESS","type":{"type":"string"}},
+      {"name":"ATTRIBUTES","type":{"type":"string"},"is_nullable": true},
+      {"name":"SUBSCRIBERKEY","type":{"type":"string"},"is_nullable": true},
+      {"name":"STATUS","type":{"type":"string"},"is_nullable": true},
+      {"name":"EMAILTYPEPREFERENCE","type":{"type":"string"},"is_nullable": true}
+    ]
+  }

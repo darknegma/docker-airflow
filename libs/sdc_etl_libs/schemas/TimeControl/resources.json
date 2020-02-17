@@ -1,0 +1,21 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "resources",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "RESOURCES", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"RESOURCETYPE","type":{"type":"string"}},
+      {"name":"CODE","type":{"type":"string"}},
+      {"name":"DESCRIPTION","type":{"type":"string"}},
+      {"name":"LASTMODIFIEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"LASTMODIFIEDBY","type":{"type":"string"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }
+
+

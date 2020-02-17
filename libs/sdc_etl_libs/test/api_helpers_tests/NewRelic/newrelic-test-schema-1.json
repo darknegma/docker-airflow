@@ -1,0 +1,19 @@
+  {
+    "namespace": "New-Relic",
+    "type": "object",
+    "name": "useragent-browser-performance",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "WEB_DATA", "table_name": "USERAGENT_BROWSER_PERFORMANCE", "schema": "NEW_RELIC"},
+    "data_source": {"type": "api", "base_url": "https://api.newrelic.com/v2/applications/19492159/"},
+    "fields": [
+      {"name":"NAME","type":{"type":"string"}, "sf_merge_key": true},
+      {"name":"FROM","type":{"type":"string","logical_type":"datetime"}, "sf_merge_key": true},
+      {"name":"TO","type":{"type":"string","logical_type":"datetime"}, "sf_merge_key": true},
+      {"name":"AVERAGE_RESPONSE_TIME","type":{"type":"float"}},
+      {"name":"AVERAGE_FE_RESPONSE_TIME","type":{"type":"float"}},
+      {"name":"AVERAGE_BE_RESPONSE_TIME","type":{"type":"float"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }
+
+

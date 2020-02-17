@@ -1,0 +1,17 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "periods-pay",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "PERIODS_PAY", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"LABEL","type":{"type":"string"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"START","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"END","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"STATUS","type":{"type":"string"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

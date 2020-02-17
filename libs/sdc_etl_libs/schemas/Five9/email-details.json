@@ -1,0 +1,148 @@
+ {
+    "namespace": "Five9",
+    "type": "object",
+    "name": "email-details",
+    "country_code": "USA",
+    "estimated_row_size": "40b",
+    "estimated_row_count": 500,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "CONTACT_CENTER",
+        "table_name": "EMAIL_DETAILS",
+        "schema": "FIVE9",
+        "bookmark_filenames": false,
+        "write_filename_to_db": true,
+        "upsert": true,
+        "dedupe": true,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "EMAIL_DETAILS",
+        "schema": "FIVE9",
+        "bookmark_filenames": false,
+        "write_filename_to_db": true,
+        "upsert": true,
+        "dedupe": true,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "tag": "main_source_0",
+        "endpoint_type": "source",
+        "host": "sftp.smiledirectclub.com",
+        "port": 22,
+        "path": "/sdc-five9-call-data/reports/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "five9/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "email.*(today|24_hours).csv"
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "main_source_1",
+        "endpoint_type": "source",
+        "host": "sftp.smiledirectclub.com",
+        "port": 22,
+        "path": "/sdc-five9-call-data/reports/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "five9/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "email.*(yesterday).csv"
+        }
+      },
+      {
+        "type": "sftp",
+        "tag": "main_source_2",
+        "endpoint_type": "source",
+        "host": "sftp.smiledirectclub.com",
+        "port": 22,
+        "path": "/sdc-five9-call-data/reports/",
+        "credentials": {
+          "type": "awssecrets",
+          "name": "five9/sftp"
+        },
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "email.*(last_seven).csv"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"SESSION GUID","type":{"type":"string"}, "sf_merge_key": true},
+      {"name":"PARENT SESSION GUID","type":{"type":"string"}, "default_value": "no_parent_session_guid", "sf_merge_key": true},
+      {"name":"DATE","type":{"type":"string"}, "sf_merge_key": true},
+      {"name":"TIME","type":{"type":"string"}, "sf_merge_key": true},
+      {"name":"AGENT","type":{"type":"string"}},
+      {"name":"AGENT FIRST NAME","type":{"type":"string"}},
+      {"name":"AGENT GROUP","type":{"type":"string"}},
+      {"name":"AGENT ID","type":{"type":"string"}},
+      {"name":"AGENT LAST NAME","type":{"type":"string"}},
+      {"name":"AGENT NAME","type":{"type":"string"}},
+      {"name":"ACCOUNT NAME","type":{"type":"string"}, "is_pii": true},
+      {"name":"CAMPAIGN","type":{"type":"string"}},
+      {"name":"CUSTOMER ID","type":{"type":"string"}},
+      {"name":"CUSTOMER NAME","type":{"type":"string"}, "is_pii": true},
+      {"name":"DISPOSITION","type":{"type":"string"}},
+      {"name":"ENGAGE STATUS","type":{"type":"string"}},
+      {"name":"FROM ADDRESS","type":{"type":"string"}, "is_pii": true},
+      {"name":"INTERACTION TYPE","type":{"type":"string"}},
+      {"name":"INTERACTIONS","type":{"type":"int"}},
+      {"name":"MEDIA SOURCE","type":{"type":"string"}},
+      {"name":"MEDIA SUBTYPE","type":{"type":"string"}},
+      {"name":"MEDIA TYPE","type":{"type":"string"}},
+      {"name":"MEDIA VENDOR","type":{"type":"string"}},
+      {"name":"OUTREACH IND","type":{"type":"string"}},
+      {"name":"SKILL","type":{"type":"string"}},
+      {"name":"TO ADDRESS","type":{"type":"string"}, "is_pii": true},
+      {"name":"TRANSCRIPT LINK","type":{"type":"string"}},
+      {"name":"WORK ITEM STATUS","type":{"type":"string"}},
+      {"name":"DECISION TIME","type":{"type":"string"}},
+      {"name":"EMAIL QUEUE TIME","type":{"type":"string"}, "default_value": "00:00:00", "sf_merge_key": true},
+      {"name":"EMAIL TIME","type":{"type":"string"}},
+      {"name":"FCR TIME","type":{"type":"string"}},
+      {"name":"HANDLE TIME","type":{"type":"string"}},
+      {"name":"INTERACTION TIME","type":{"type":"string"}},
+      {"name":"PREVIEW ENGAGED","type":{"type":"int"}},
+      {"name":"PREVIEW TIME","type":{"type":"string"}},
+      {"name":"PROACTIVE OFFERS","type":{"type":"string"}},
+      {"name":"PROGRESS TIME","type":{"type":"string"}},
+      {"name":"QUEUE TIME","type":{"type":"string"}},
+      {"name":"RESOLUTION TIME","type":{"type":"string"}},
+      {"name":"RESPONSE TIME","type":{"type":"string"}},
+      {"name":"TIME TILL ACCEPT","type":{"type":"string"}},
+      {"name":"TRANSFERS","type":{"type":"int"}},
+      {"name":"TRANSFERS TO AGENT","type":{"type":"int"}},
+      {"name":"TRANSFERS TO CAMPAIGN","type":{"type":"int"}},
+      {"name":"TRANSFERS TO SKILL","type":{"type":"int"}},
+      {"name":"TIMESTAMP","type":{"type":"string"}, "is_nullable":  true},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }}
+    ]
+  }

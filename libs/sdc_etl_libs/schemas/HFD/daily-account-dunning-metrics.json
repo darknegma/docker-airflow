@@ -1,0 +1,90 @@
+  {
+    "namespace": "HFD",
+    "type": "object",
+    "name": "daily-account-dunning-metrics",
+    "country_code": "USA",
+    "estimated_row_size": "0",
+    "estimated_row_count": 0,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "FINANCE",
+        "table_name": "DAILY_ACCOUNT_DUNNING_METRICS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "DAILY_ACCOUNT_DUNNING_METRICS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "s3",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "region": "us-east-2",
+        "bucket": "sdc-hfd",
+        "prefix": "sdc-hfd/daily_dunning_metrics/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": ".*"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"HFDID","type":{"type":"string"}},
+      {"name":"ACTIVATEDATE","type":{"type":"string"}},
+      {"name":"ACTIVATEDYM","type":{"type":"string"}},
+      {"name":"SNAPSHOTDATE","type":{"type":"string"}},
+      {"name":"PAYMENTSTATUS","type":{"type":"string"}},
+      {"name":"FINANCEDAMOUNT","type":{"type":"string"}},
+      {"name":"ENDINGPRINCIPALBALANCE","type":{"type":"string"}},
+      {"name":"CURMTHFEES","type":{"type":"string"}},
+      {"name":"CURMTHFEESWAIVED","type":{"type":"string"}},
+      {"name":"TOTALFEES","type":{"type":"string"}},
+      {"name":"TOTALFEESWAIVED","type":{"type":"string"}},
+      {"name":"ADJUSTMENTSCURMTH","type":{"type":"string"}},
+      {"name":"ADJUSTMENTSTOTAL","type":{"type":"string"}},
+      {"name":"PAIDCURMTH","type":{"type":"string"}},
+      {"name":"TOTALPAID","type":{"type":"string"}},
+      {"name":"LASTPMTDATE","type":{"type":"string"}},
+      {"name":"LASTPMTAMOUNT","type":{"type":"string"}},
+      {"name":"DAYSPASTDUE","type":{"type":"string"}},
+      {"name":"CALLSCURMTH","type":{"type":"string"}},
+      {"name":"TEXTSCURMTH","type":{"type":"string"}},
+      {"name":"EMAILSCURMTH","type":{"type":"string"}},
+      {"name":"LETTERSCURMONTH","type":{"type":"string"}},
+      {"name":"DUNNINGCURMTH","type":{"type":"string"}},
+      {"name":"CALLSTOT","type":{"type":"string"}},
+      {"name":"TEXTSTOT","type":{"type":"string"}},
+      {"name":"EMAILSTOT","type":{"type":"string"}},
+      {"name":"LETTERSTOTAL","type":{"type":"string"}},
+      {"name":"TOTALDUNNING","type":{"type":"string"}},
+      {"name":"ATTEMPTSSINCELASTPMTDATE","type":{"type":"string"}},
+      {"name":"NEXTPAYMENTDATE","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string", "logical_type":"datetime", "add_column": true }}
+    ]
+  }

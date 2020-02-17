@@ -1,0 +1,14 @@
+{
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "project",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "TIME_MANAGEMENT_PROJECT", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://knw12.ulticlock.com/UtmOdataServices/api"},
+  "fields": [
+    {"name":"ID","type":{"type":"int"},"sf_merge_key": true},
+    {"name":"NAME","type":{"type":"string"}},
+    {"name":"DESCRIPTION","type":{"type":"string"}},
+    {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+  ]
+}

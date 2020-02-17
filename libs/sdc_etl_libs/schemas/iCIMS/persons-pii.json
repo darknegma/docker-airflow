@@ -1,0 +1,85 @@
+  {
+    "namespace": "ICIMS",
+    "type": "object",
+    "name": "persons-pii",
+    "country_code": "USA",
+    "estimated_row_size": "80b",
+    "estimated_row_count": 500,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "HRIS_DATA",
+        "table_name": "PERSONS_PII",
+        "schema": "ICIMS",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "PERSONS_PII",
+        "schema": "ICIMS",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "host": "ftp.icims.com",
+        "port": 22,
+        "path": "Outbound/People/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "export.Person.*.csv"
+        },
+        "credentials": {
+          "type": "awssecrets",
+          "name": "icims/sftp"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"Full Name: First Last","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"System ID","type":{"type":"int"},"is_nullable": true},
+      {"name":"Email","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"Default: Phones : Number","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"Created Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Updated Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Default: Addresses : Address","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"Default: Addresses : Address 2","type":{"type":"string"},"is_nullable": true, "is_pii": true},
+      {"name":"Default: Addresses : City","type":{"type":"string"},"is_nullable": true},
+      {"name":"Default: Addresses : Postal Code","type":{"type":"string"},"is_nullable": true},
+      {"name":"Default: Addresses : State/Province (Full Name)","type":{"type":"string"},"is_nullable": true},
+      {"name":"Default: Addresses : Country (Full Name)","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source Channel","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source Portal","type":{"type":"string"},"is_nullable": true},
+      {"name":"Gender","type":{"type":"string"},"is_nullable": true},
+      {"name":"Race","type":{"type":"string"},"is_nullable": true},
+      {"name":"Promotion/Transfer Date","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source Specifics","type":{"type":"string"},"is_nullable": true},
+      {"name":"Source Person : Full Name: First Last","type":{"type":"string"},"is_nullable": true},
+      {"name":"Person Folder","type":{"type":"string"},"is_nullable": true},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

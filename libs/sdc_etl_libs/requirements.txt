@@ -1,0 +1,14 @@
+pytest
+pytest-mock
+requests-mock
+numpy
+pandas
+sqlalchemy
+snowflake
+boto3
+pyodbc
+snowflake-sqlalchemy
+snowflake-connector-python
+Salesforce-FuelSDK
+pyarrow
+psycopg2

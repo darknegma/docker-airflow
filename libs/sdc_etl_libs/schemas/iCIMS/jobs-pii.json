@@ -1,0 +1,119 @@
+  {
+    "namespace": "ICIMS",
+    "type": "object",
+    "name": "jobs-pii",
+    "country_code": "USA",
+    "estimated_row_size": "45b",
+    "estimated_row_count": 100,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "HRIS_DATA",
+        "table_name": "JOBS_PII",
+        "schema": "ICIMS",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "JOBS_PII",
+        "schema": "ICIMS",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "sftp",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "host": "ftp.icims.com",
+        "port": 22,
+        "path": "Outbound/Jobs/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": "export.Job.*csv"
+        },
+        "credentials": {
+          "type": "awssecrets",
+          "name": "icims/sftp"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"Job ID","type":{"type":"string"},"is_nullable": true},
+      {"name":"Created Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"Job Folder","type":{"type":"string"},"is_nullable": true},
+      {"name":"Updated Date","type":{"type":"string","logical_type":"datetime"},"is_nullable": true},
+      {"name":"External Job Title","type":{"type":"string"},"is_nullable": true},
+      {"name":"Internal Job Title","type":{"type":"string"},"is_nullable": true},
+      {"name":"Hiring Manager : Full Name: First Last","type":{"type":"string"},"is_nullable": true},
+      {"name":"Location : Name Linked","type":{"type":"string"},"is_nullable": true},
+      {"name":"Location : City","type":{"type":"string"},"is_nullable": true},
+      {"name":"Location : State/Province","type":{"type":"string"},"is_nullable": true},
+      {"name":"Location : Postal Code","type":{"type":"string"},"is_nullable": true},
+      {"name":"Recruiter : Full Name: First Last","type":{"type":"string"},"is_nullable": true},
+      {"name":"Business Unit","type":{"type":"string"},"is_nullable": true},
+      {"name":"Hire Type","type":{"type":"string"},"is_nullable": true},
+      {"name":"Job Code","type":{"type":"string"},"is_nullable": true},
+      {"name":"Team","type":{"type":"string"},"is_nullable": true},
+      {"name":"Job Type","type":{"type":"string"},"is_nullable": true},
+      {"name":"Location : External ID","type":{"type":"string"},"is_nullable": true},
+      {"name":"# of Days Since First Approved","type":{"type":"string"},"is_nullable": true},
+      {"name":"Days To Fill","type":{"type":"string"},"is_nullable": true},
+      {"name":"# of Days In Pending Approval","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Approved","type":{"type":"string"},"is_nullable": true},
+      {"name":"Days To Approve","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Closed (Filled)","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Closed (Not Filled)","type":{"type":"string"},"is_nullable": true},
+      {"name":"# of Openings","type":{"type":"string"},"is_nullable": true},
+      {"name":"# of Openings Remaining","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date Last Placed in Approved","type":{"type":"string"},"is_nullable": true},
+      {"name":"Date First Placed in Hold","type":{"type":"string"},"is_nullable": true},
+      {"name":"Location : Country","type":{"type":"string"},"is_nullable": true},
+      {"name":"Subteam","type":{"type":"string"},"is_nullable": true},
+      {"name":"Talent Acq Coordinator : Full Name: First Last","type":{"type":"string"},"is_nullable": true},
+      {"name":"HR Business Partner : Full Name: First Last","type":{"type":"string"},"is_nullable": true},
+      {"name":"Targeted Job Start Date","type":{"type":"string"},"is_nullable": true},
+      {"name":"Base Min","type":{"type":"string"},"is_nullable": true},
+      {"name":"Base Midpoint","type":{"type":"string"},"is_nullable": true},
+      {"name":"Base Max","type":{"type":"string"},"is_nullable": true},
+      {"name":"Hourly Base Min","type":{"type":"string"},"is_nullable": true},
+      {"name":"Hourly Base Midpoint","type":{"type":"string"},"is_nullable": true},
+      {"name":"Hourly Base Max","type":{"type":"string"},"is_nullable": true},
+      {"name":"Agency Min","type":{"type":"string"},"is_nullable": true},
+      {"name":"Agency Max","type":{"type":"string"},"is_nullable": true},
+      {"name":"LTI/MTIP %","type":{"type":"string"},"is_nullable": true},
+      {"name":"Pension/Stock %","type":{"type":"string"},"is_nullable": true},
+      {"name":"Annual Bonus % Min","type":{"type":"string"},"is_nullable": true},
+      {"name":"Annual Bonus % Max","type":{"type":"string"},"is_nullable": true},
+      {"name":"Component Company : Name","type":{"type":"string"},"is_nullable": true},
+      {"name":"Scope","type":{"type":"string"},"is_nullable": true},
+      {"name":"Referral Program Type","type":{"type":"string"},"is_nullable": true},
+      {"name":"Internal Payout Time Frame (Days)","type":{"type":"string"},"is_nullable": true},
+      {"name":"Internal Bonus Amount","type":{"type":"string"},"is_nullable": true},
+      {"name":"Relocation Max","type":{"type":"string"},"is_nullable": true},
+      {"name":"Sign-on Bonus Min","type":{"type":"string"},"is_nullable": true},
+      {"name":"Sign-on Bonus Max","type":{"type":"string"},"is_nullable": true},
+      {"name":"Total # of Candidates","type":{"type":"string"},"is_nullable": true},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

@@ -1,0 +1,26 @@
+{
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "users",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "USERS_PII", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"LANGUAGE","type":{"type":"string","logical_type":"json"}},
+      {"name":"PROFILE","type":{"type":"string","logical_type":"json"}},
+      {"name":"EMAIL","type":{"type":"string"}},
+      {"name":"ISINACTIVE","type":{"type":"boolean"}},
+      {"name":"LOGINTYPE","type":{"type":"string"}},
+      {"name":"MOBILELOGINTYPE","type":{"type":"string"}},
+      {"name":"ACTIVEDIRUSER","type":{"type":"string"}},
+      {"name":"LASTMODIFIEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"LASTMODIFIEDBY","type":{"type":"string"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"CODE","type":{"type":"string"}},
+      {"name":"NAME","type":{"type":"string"}},
+      {"name":"EMPLOYEE","type":{"type":"string","logical_type":"json"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

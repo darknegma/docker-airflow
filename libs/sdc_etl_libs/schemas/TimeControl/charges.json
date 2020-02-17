@@ -1,0 +1,27 @@
+  {
+    "namespace": "TimeControl",
+    "type": "object",
+    "name": "charges",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "CHARGES", "schema": "TIMECONTROL"},
+    "data_source": {"type": "api", "base_url": "https://smiledirectclub.timecontrol.net/api/v1"},
+    "fields": [
+      {"name":"CODE","type":{"type":"string"}},
+      {"name":"DESCRIPTION","type":{"type":"string"}},
+      {"name":"WBS","type":{"type":"string","logical_type":"json"}},
+      {"name":"BANKS","type":{"type":"string","logical_type":"json"}},
+      {"name":"LASTMODIFIEDAT","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"LASTMODIFIEDBY","type":{"type":"string"}},
+      {"name":"BUDGETHOURS","type":{"type":"float"}},
+      {"name":"BUDGETCOST","type":{"type":"float"}},
+      {"name":"STARTDATE","type":{"type":"string", "logical_type":"datetime"}, "is_nullable": true},
+      {"name":"FINISHDATE","type":{"type":"string", "logical_type":"datetime"}, "is_nullable": true},
+      {"name":"PARENTKEY","type":{"type":"int"}, "is_nullable": true},
+      {"name":"STATUS","type":{"type":"string"}},
+      {"name":"PROJECT","type":{"type":"string","logical_type":"json"}},
+      {"name":"USERFIELDS","type":{"type":"string","logical_type":"json"}},
+      {"name":"_METADATA","type":{"type":"string","logical_type":"json"}},
+      {"name":"KEY","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+    ]
+  }

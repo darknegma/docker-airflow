@@ -1,0 +1,33 @@
+{
+    "namespace": "Ultipro",
+    "type": "object",
+    "name": "schedule",
+    "country_code": "USA",
+    "data_sink": {"type":"snowflake", "database": "HRIS_DATA", "table_name": "TIME_MANAGEMENT_SCHEDULE", "schema": "ULTIPRO"},
+    "data_source": {"type": "api", "base_url": "https://knw12.ulticlock.com/UtmOdataServices/api"},
+    "fields": [
+      {"name":"ID","type":{"type":"int"},"sf_merge_key": true},
+      {"name":"EMPLOYEEID","type":{"type":"int"}},
+      {"name":"WORKDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"PAYCODEID","type":{"type":"int"}},
+      {"name":"SCHDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"SCHBY","type":{"type":"int"}},
+      {"name":"SCHSTART","type":{"type":"int"}},
+      {"name":"SCHEND","type":{"type":"int"}},
+      {"name":"HOURS","type":{"type":"float"}},
+      {"name":"MEALDED","type":{"type":"int"}},
+      {"name":"PAYGROUPID","type":{"type":"int"}},
+      {"name":"LOCATIONID","type":{"type":"int"}},
+      {"name":"JOBID","type":{"type":"int"}},
+      {"name":"PROJECTID","type":{"type":"int"}},
+      {"name":"ORGLEVEL1ID","type":{"type":"int"}},
+      {"name":"ORGLEVEL2ID","type":{"type":"int"}},
+      {"name":"ORGLEVEL3ID","type":{"type":"int"}},
+      {"name":"ORGLEVEL4ID","type":{"type":"int"}},
+      {"name":"STATUS","type":{"type":"int"}},
+      {"name":"NOTE","type":{"type":"string"}},
+      {"name":"COMMENT","type":{"type":"string"}},
+      {"name":"SCHEDULEREQUESTID","type":{"type":"int"}},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string","logical_type":"datetime", "add_column": true }}
+  ]
+}

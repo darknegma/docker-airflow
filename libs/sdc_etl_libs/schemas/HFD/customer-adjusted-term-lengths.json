@@ -1,0 +1,67 @@
+  {
+    "namespace": "HFD",
+    "type": "object",
+    "name": "customer-adjusted-term-lengths",
+    "country_code": "USA",
+    "estimated_row_size": "0",
+    "estimated_row_count": 0,
+    "data_sink": [
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0",
+        "endpoint_type": "sink",
+        "database": "FINANCE",
+        "table_name": "CUSTOMER_ADJUSTED_TERM_LENGTHS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      },
+      {
+        "type": "snowflake",
+        "tag": "SDC_sink_0_dev",
+        "endpoint_type": "sink",
+        "database": "DATAENGINEERING",
+        "table_name": "CUSTOMER_ADJUSTED_TERM_LENGTHS",
+        "schema": "HFD",
+        "bookmark_filenames": true,
+        "write_filename_to_db": true,
+        "upsert": false,
+        "credentials": {
+          "type": "awssecrets",
+          "name": "snowflake/service_account/airflow"
+        }
+      }
+    ],
+    "data_source": [
+      {
+        "type": "s3",
+        "tag": "main_source",
+        "endpoint_type": "source",
+        "region": "us-east-2",
+        "bucket": "sdc-hfd",
+        "prefix": "sdc-hfd/customer_adjusted_term_lengths/",
+        "file_info": {
+          "type": "csv",
+          "delimiter": ",",
+          "headers": true,
+          "file_regex": ".*"
+        }
+      }
+    ],
+    "fields": [
+      {"name":"PROCEDUREID","type":{"type":"string"}},
+      {"name":"INITIAL TERM LENGTH","type":{"type":"string"}},
+      {"name":"FIRSTPAYMENTDATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"UPDATED TERM LENGTH","type":{"type":"string"}},
+      {"name":"SELECTED TERM LENGTH","type":{"type":"string"}},
+      {"name":"REFINANCE DATE","type":{"type":"string","logical_type":"datetime"}},
+      {"name":"NUMBER OF PAYMENTS PAID","type":{"type":"string"}},
+      {"name":"_ETL_FILENAME","type":{"type":"string", "add_column": true }},
+      {"name":"_SF_INSERTEDDATETIME","type":{"type":"string", "logical_type":"datetime", "add_column": true }}
+    ]
+  }
