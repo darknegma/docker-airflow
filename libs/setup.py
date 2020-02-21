@@ -20,14 +20,14 @@ setuptools.setup(
         'numpy',
         'sqlalchemy',
         'snowflake',
-        'pyodbc',
+        #'pyodbc',
         'Salesforce-FuelSDK',
         'zeep',
         'backoff', 
         'gnupg',
         'python-gnupg',
         'google-api-python-client'
-        ,'psycopg2'
+        #,'psycopg2'
     ],
     classifiers=[
         "Programming Language :: Python :: 3"
