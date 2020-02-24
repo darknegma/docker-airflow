@@ -1,12 +1,13 @@
-language: ruby
+sudo: required
 
 services:
   - docker
 
-before_install:
+branches:
+  only:
+    - master
+    
+install:
 - docker build -f Dockerfile.dev --tag airflow/sdc .
-- docker ps -a
-- docker run -it -p 8080:8080 airflow/sdc bash
 
-script:
-- bundle exec airflow/sdc bash
+
