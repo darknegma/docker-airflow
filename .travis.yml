@@ -7,7 +7,11 @@ branches:
   only:
     - master
     
-install:
+script:
 - docker build -f Dockerfile.dev --tag airflow/sdc .
+- docker run -it -p 8080:8080 airflow/sdc webserver
 
+
+after_script:
+  - docker images
 
