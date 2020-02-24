@@ -9,7 +9,7 @@ branches:
     
 script:
 - docker build -f Dockerfile.dev --tag airflow/sdc .
-- docker run -it -p 8080:8080 airflow/sdc webserver
+#- docker run -it -p 8080:8080 airflow/sdc webserver
 
 
 after_script:
