@@ -9,11 +9,9 @@ branches:
     
 script:
 - docker build --tag airflow/sdc .
-- docker run -p 8080:8080 -d airflow/sdc webserver -- -- coverage
-
 
 after_script:
-  - docker images
+  - docker run -d -p 8080:8080 airflow/sdc webserver -- -- coverage
 
 deploy:
   edge: true
