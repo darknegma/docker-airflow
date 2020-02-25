@@ -15,3 +15,17 @@ script:
 after_script:
   - docker images
 
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: "docker-airflow"
+  env: "DockerAirflow-env"
+  bucket_name: "elasticbeanstalk-us-east-1-663668850653"  
+  bucket_paht: "docker-airflow"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$SECRET_ACCESS_KEY"
+  
