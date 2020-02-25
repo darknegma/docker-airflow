@@ -9,12 +9,12 @@ branches:
     
 script:
 - docker build --tag airflow/sdc .
-- docker run -p 8080:8080 airflow/sdc webserver -- --coverage
+- docker run -p 8080:8080 -d airflow/sdc webserver 
 
 
 after_script:
   - docker images
-  
+
 deploy:
   edge: true
   provider: elasticbeanstalk
