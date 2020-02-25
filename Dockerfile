@@ -6,7 +6,7 @@ RUN groupadd --gid 999 docker
 ENV AIRFLOW_HOME=/usr/local/airflow
 
 
-EXPOSE 80
+EXPOSE 8080
 
 COPY requirements.txt /
 ENV SLUGIFY_USES_TEXT_UNIDECODE=yes
