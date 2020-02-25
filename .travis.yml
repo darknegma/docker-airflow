@@ -8,12 +8,12 @@ branches:
     - master
     
 script:
-- docker build -f Dockerfile.dev --tag airflow/sdc .
-#- docker run -it -p 8080:8080 airflow/sdc webserver
+- docker build --tag airflow/sdc .
 
 
 after_script:
   - docker images
+  - docker run -p 8080:8080 airflow/sdc webserver -- --coverage 
 
 deploy:
   edge: true
@@ -27,5 +27,5 @@ deploy:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: 
-    secure: "$SECRET_ACCESS_KEY"
+    secure: "$SECRET_ACCESS_KEY"x
   
